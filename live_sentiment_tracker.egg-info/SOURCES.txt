@@ -1,0 +1,7 @@
+setup.py
+live_sentiment_tracker.egg-info/PKG-INFO
+live_sentiment_tracker.egg-info/SOURCES.txt
+live_sentiment_tracker.egg-info/dependency_links.txt
+live_sentiment_tracker.egg-info/not-zip-safe
+live_sentiment_tracker.egg-info/requires.txt
+live_sentiment_tracker.egg-info/top_level.txt
