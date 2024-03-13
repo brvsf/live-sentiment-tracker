@@ -1,4 +1,3 @@
-import pandas as pd
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from model import vader
@@ -19,19 +18,14 @@ app.add_middleware(
 @app.get("/predict")
 def predict(
         sentence : str
-    ):
+):
     """
     Make a single sentence prediction.
     """
 
-    y_pred = pd.DataFrame(
-        {'sentence' : sentence},
-        index=[0]
-    )
-
-    result = app.state.model(y_pred)
+    result = app.state.model(sentence)
     return result
 
 @app.get("/")
 def root():
-    return {'greeting' : 'Hello'}
+    return {'foi' : 'desgraça'}

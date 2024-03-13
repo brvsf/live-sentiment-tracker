@@ -1,4 +1,8 @@
 setup.py
+live-sentiment-tracker/__init__.py
+live-sentiment-tracker/project/__init__.py
+live-sentiment-tracker/project/app.py
+live-sentiment-tracker/project/model.py
 live_sentiment_tracker.egg-info/PKG-INFO
 live_sentiment_tracker.egg-info/SOURCES.txt
 live_sentiment_tracker.egg-info/dependency_links.txt
