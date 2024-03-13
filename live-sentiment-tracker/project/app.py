@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from model import vader
+from .model import vader_scores
 
 app = FastAPI()
-app.state.model = vader
+app.state.model = vader_scores
 
 # Allowing all middleware is optional, but good practice for dev purposes
 app.add_middleware(
