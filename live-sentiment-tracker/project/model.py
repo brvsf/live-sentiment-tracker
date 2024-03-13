@@ -27,3 +27,14 @@ def vader(sentence):
     else:
         overall_sentiment = 'The overall sentiment is Neutral 😐'
         return overall_sentiment
+
+
+def vader_scores(sentence):
+    """
+    Function to return the dict with the sentiments
+    """
+    vader_model = SentimentIntensityAnalyzer()
+
+    sentiment_dict = vader_model.polarity_scores(sentence)
+
+    return sentiment_dict
