@@ -1,4 +1,7 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from preprocess import SlangTranslation
+
+print (f'Creating model functions ⏳')
 
 def vader(sentence):
     """
@@ -6,11 +9,12 @@ def vader(sentence):
     """
     # Instanciating SentimentIntensityAnalyzer object
     vader_model = SentimentIntensityAnalyzer()
-
+    sentence = SlangTranslation(sentence).apply_translator(sentence)
     # Creating sentiment dict from vader model
     sentiment_dict = vader_model.polarity_scores(sentence)
 
     # Printing sentiment percentage
+    print(f'Sentence: "{sentence}"')
     print(f"This sentence is: {sentiment_dict['pos']*100} % positive")
     print(f"{sentiment_dict['neu']*100} % neutral")
     print(f"{sentiment_dict['neg']*100} % negative")
@@ -34,7 +38,15 @@ def vader_scores(sentence):
     Function to return the dict with the sentiments
     """
     vader_model = SentimentIntensityAnalyzer()
-
+    sentence = SlangTranslation(sentence).apply_translator(sentence)
     sentiment_dict = vader_model.polarity_scores(sentence)
-
+    print(f'Sentence: "{sentence}"')
     return sentiment_dict
+
+sentence_test = "i'm so happy wtf"
+print(f'---------------Testing vader scores function---------------')
+print(vader_scores(sentence_test))
+print(f'------------------Testing vader function------------------')
+print(vader(sentence_test))
+
+print (f'Everything is ok ✅')
