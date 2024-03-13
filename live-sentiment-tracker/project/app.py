@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from model import vader
+from .model import vader
 
 app = FastAPI()
 app.state.model = vader
