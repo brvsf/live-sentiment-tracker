@@ -11,6 +11,7 @@ img_pos = Image.open('live-sentiment-tracker/project/images/positive.png')
 img_neg = Image.open('live-sentiment-tracker/project/images/negative.png')
 img_neu = Image.open('live-sentiment-tracker/project/images/neutral.png')
 
+
 @app.addapp()
 def home():
     hy.header('Live sentiment tracking:')
@@ -18,9 +19,23 @@ def home():
     col1, col2 = st.columns([5, 2])
 
     with col1:
+
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown('Make sure to pay attention to the emojis while you write!')
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown(' ')
+
         value = st_keyup("", key="0", placeholder= 'Write here...', )
 
-    url = "http://127.0.0.1:8000/predict?sentence="
+    url = "http://127.0.0.1:8000/scores?sentence="
 
     url_full = url + value
 
@@ -51,14 +66,6 @@ def home():
                 shadow=False, startangle=90)
                 ax2.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
                 st.pyplot(fig2)
-
-
-    url = "http://127.0.0.1:8000/predict?sentence="
-
-    url_full = url + value
-
-    req = requests.get(url = url_full)
-    result = req.json()
 
     pos_size = int((result['pos']*1.2)*80)
     if pos_size < 30:
