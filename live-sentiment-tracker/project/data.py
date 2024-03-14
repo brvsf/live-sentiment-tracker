@@ -2,9 +2,11 @@
 
 import pandas as pd
 import os
+
 print (f'Starting data import ⏳')
 current_directory = os.path.realpath('data.py')
 parent_directory = parent_directory = os.path.dirname(current_directory)
+
 
 class ImportData:
 
