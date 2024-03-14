@@ -21,15 +21,15 @@ def vader(sentence):
 
     # Conditional to return overall sentiment of the sentence
     if sentiment_dict['compound'] >= 0.05:
-        overall_sentiment = 'The overall sentiment is Positive 😊'
+        overall_sentiment = 'The overall sentiment is Positive' #😊
         return overall_sentiment
 
     if sentiment_dict['compound'] <= -0.05:
-        overall_sentiment = 'The overall sentiment is Negative 😔'
+        overall_sentiment = 'The overall sentiment is Negative' #😔
         return overall_sentiment
 
     else:
-        overall_sentiment = 'The overall sentiment is Neutral 😐'
+        overall_sentiment = 'The overall sentiment is Neutral' #😐
         return overall_sentiment
 
 
