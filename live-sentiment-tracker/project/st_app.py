@@ -5,22 +5,57 @@ import hydralit as hy
 from PIL import Image
 import matplotlib.pyplot as plt
 import streamlit.components.v1 as components
+from streamlit_option_menu import option_menu
 
-app = hy.HydraApp(title='Live sentiment tracker', use_loader=False)
+#app = hy.HydraApp(title='Live sentiment tracker', use_loader=False, favicon= '😎',
+#                 navbar_theme = {'txc_inactive': '#FFFFFF','menu_background':'#FA5765','txc_active':'#FA5765','option_active':'white'})
+
+st.set_page_config(page_title="Live sentiment tracker", layout="wide")
+
+selected = option_menu(
+    menu_title=None,  # required
+    options=["Home", "Project", "The crew"],  # required
+    icons=["house", "rocket-takeoff", "person-badge"],  # optional
+    menu_icon="cast",  # optional
+    default_index=0,  # optional
+    orientation="horizontal",
+    styles={
+        "container": {"padding": "0!important", "background-color": "#fafafa"},
+        "icon": {"color": "orange", "font-size": "25px"},
+        "nav-link": {
+            "font-size": "25px",
+            "text-align": "left",
+            "margin": "0px",
+            "--hover-color": "#eee",
+        },
+        "nav-link-selected": {"background-color": "#FA5765"},
+    },
+)
+
+
+
+
+st.write('<style>div.block-container{padding-top:3.5rem;}</style>', unsafe_allow_html=True)
+
 
 img_pos = Image.open('live-sentiment-tracker/project/images/positive.png')
 img_neg = Image.open('live-sentiment-tracker/project/images/negative.png')
 img_neu = Image.open('live-sentiment-tracker/project/images/neutral.png')
 
 
-@app.addapp(is_home=True)
-def home():
+#@app.addapp(is_home=True)
+#def home():
+if selected == "Home":
     hy.header('Live sentiment tracking:')
 
     col1, col2 = st.columns([5, 2])
 
     with col1:
 
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown(' ')
+        st.markdown(' ')
         st.markdown(' ')
         st.markdown(' ')
         st.markdown('**Make sure to pay attention to the emojis while you write!**')
@@ -99,32 +134,59 @@ def home():
     # st.markdown(f'neutral: {neu_size}, P: {result["neu"]}')
     # st.markdown(f'negative: {neg_size}, P: {result["neg"]}')
 
-@app.addapp(title = ' Project' , icon = '🚀')
-def app2():
+#@app.addapp(title = ' Project' , icon = '🚀')
+#def app2():
+if selected == "Project":
 
-    st.markdown("<h1 style='text-align: center; color: black;'>Presentation</h1>",
+    construction = Image.open('live-sentiment-tracker/project/images/construction.jpeg')
+
+    st.markdown("<h1 style='text-align: center; color: black;'>Oops, you're here early</h1>",
                  unsafe_allow_html=True)
-    cols = st.columns([1, 1, 1, 1, 1, 1])
+    cols = st.columns([1, 1, 1, 1, 1, 1, 1])
 
-    with cols[1]:
-        components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vShfnJ"
-                      "JYuL9t4OGCmVJz5JKO7fi1BUyFzcjwqiHBom77xHYzBv5aC_7-fE46kuf"
-                      "YQcNu4EpDlVDUxsE/embed?start=false&loop=false&delayms=60000"
-                      , height=560, width = 900)
+    with cols[3]:
+        st.image(construction.resize((4000,4000)))
+
+    st.markdown("<h4 style='text-align: center; color: black;'>Don't mind us :)</h4>",
+                 unsafe_allow_html=True)
 
 
-@app.addapp(title=' The crew', icon = '👨‍🔧')
-def app3():
+#@app.addapp(title=' The crew', icon = '👨‍🔧')
+#def app3():
+if selected == "The crew":
 
 
  col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 
  with col2:
 
-     isaac_pfp = Image.open('live-sentiment-tracker/project/images/isaac_pfp.jpeg')
-     st.image(isaac_pfp.resize((150,150)))
+     isaac_pfp = Image.open('live-sentiment-tracker/project/images/isaac_pfp.jpg')
+     st.image(isaac_pfp.resize((200,200)))
 
      st.markdown("""
+        <style>
+            .st-emotion-cache-1v0mbdj {
+              width: 150px;
+              height: 150px;
+              border-radius: 50%;
+              overflow: hidden;
+              box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+          }
+
+            .st-emotion-cache-1v0mbdj img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+          }
+        </style>
+        """, unsafe_allow_html=True)
+
+ with col5:
+
+    bruno_pfp = Image.open('live-sentiment-tracker/project/images/bruno_pfp.jpeg')
+    st.image(bruno_pfp.resize((200,200)))
+
+    st.markdown("""
         <style>
             .st-emotion-cache-1v0mbdj {
               width: 150px;
@@ -158,15 +220,29 @@ def app3():
      st.markdown('**Movie-** Saving Private Ryan 🎖️')
      st.markdown('**Beverage-** Pureza 🥤')
      st.markdown('**Fruit-** Watermelon 🍉')
+     st.link_button("Check Isaac's Linkedin",
+                    "https://www.linkedin.com/in/isaac-pereira-474a9117b")
 
 
  with col2:
      st.markdown("<h2 style='text-align: center; color: black;'>Bruno </h2>",
                  unsafe_allow_html=True)
+
+     st.markdown('**Pets-**  Horus 🐶')
+     st.markdown('**Food-** Sushi 🍣')
+     st.markdown('**Age-** 24 ')
+     st.markdown('**Season-** Winter ⛄')
+     st.markdown('**Movie-** The Lord of The Rings: The Return of the King :ring:')
+     st.markdown('**Beverage-** Coffee :coffee:')
+     st.markdown('**Fruit-** Strawberry :strawberry:')
+     st.link_button("Check Bruno's Linkedin",
+                    "https://www.linkedin.com/in/bruno-vieira-2b0817238")
+
  with col3:
      st.markdown("<h2 style='text-align: center; color: black;'>Rachid </h2>",
                  unsafe_allow_html=True)
 
 
+
 #Run the whole lot, we get navbar, state management and app isolation, all with this tiny amount of work.
-app.run()
+#app.run()
