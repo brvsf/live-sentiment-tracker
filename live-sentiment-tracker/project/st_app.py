@@ -4,15 +4,16 @@ from st_keyup import st_keyup
 import hydralit as hy
 from PIL import Image
 import matplotlib.pyplot as plt
+import streamlit.components.v1 as components
 
-app = hy.HydraApp(title='Live sentiment tracker', use_loader=False, )
+app = hy.HydraApp(title='Live sentiment tracker', use_loader=False)
 
 img_pos = Image.open('live-sentiment-tracker/project/images/positive.png')
 img_neg = Image.open('live-sentiment-tracker/project/images/negative.png')
 img_neu = Image.open('live-sentiment-tracker/project/images/neutral.png')
 
 
-@app.addapp()
+@app.addapp(is_home=True)
 def home():
     hy.header('Live sentiment tracking:')
 
@@ -22,20 +23,21 @@ def home():
 
         st.markdown(' ')
         st.markdown(' ')
+        st.markdown('**Make sure to pay attention to the emojis while you write!**')
         st.markdown(' ')
+        st.markdown('''You can also toggle the pie chart* to see a more precise
+                    breakdown of each emotion. We recommend turning it on after
+                    the message is written.''')
         st.markdown(' ')
-        st.markdown(' ')
-        st.markdown('Make sure to pay attention to the emojis while you write!')
-        st.markdown(' ')
-        st.markdown(' ')
-        st.markdown(' ')
-        st.markdown(' ')
-        st.markdown(' ')
-        st.markdown(' ')
+        st.markdown('''*Please note that the pie chart may cause the app to run
+                    slower and no longer update the emojis live.''')
+
+
 
         value = st_keyup("", key="0", placeholder= 'Write here...', )
 
-    url = "http://127.0.0.1:8000/scores?sentence="
+    #url = "http://127.0.0.1:8000/scores?sentence="
+    url = "https://live-sentiment-tracker-xi2puhfsaq-ew.a.run.app/scores?sentence="
 
     url_full = url + value
 
@@ -93,12 +95,26 @@ def home():
 
 
 
-    st.markdown(f'positive: {pos_size}, P: {result["pos"]}')
-    st.markdown(f'neutral: {neu_size}, P: {result["neu"]}')
-    st.markdown(f'negative: {neg_size}, P: {result["neg"]}')
+    # st.markdown(f'positive: {pos_size}, P: {result["pos"]}')
+    # st.markdown(f'neutral: {neu_size}, P: {result["neu"]}')
+    # st.markdown(f'negative: {neg_size}, P: {result["neg"]}')
 
-@app.addapp()
-def crew():
+@app.addapp(title = ' Project' , icon = '🚀')
+def app2():
+
+    st.markdown("<h1 style='text-align: center; color: black;'>Presentation</h1>",
+                 unsafe_allow_html=True)
+    cols = st.columns([1, 1, 1, 1, 1, 1])
+
+    with cols[1]:
+        components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vShfnJ"
+                      "JYuL9t4OGCmVJz5JKO7fi1BUyFzcjwqiHBom77xHYzBv5aC_7-fE46kuf"
+                      "YQcNu4EpDlVDUxsE/embed?start=false&loop=false&delayms=60000"
+                      , height=560, width = 900)
+
+
+@app.addapp(title=' The crew', icon = '👨‍🔧')
+def app3():
 
 
  col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
@@ -133,9 +149,16 @@ def crew():
 
      st.markdown("<h2 style='text-align: center; color: black;'>Isaac </h2>",
                  unsafe_allow_html=True)
-     st.markdown('Pets-  None :(')
-     st.markdown('Food- Pho')
-     st.markdown('Age- 24')
+
+
+     st.markdown('**Pets-**  None 😔')
+     st.markdown('**Food-** Pho 🍜')
+     st.markdown('**Age-** 24 ')
+     st.markdown('**Season-** Winter ⛄')
+     st.markdown('**Movie-** Saving Private Ryan 🎖️')
+     st.markdown('**Beverage-** Pureza 🥤')
+     st.markdown('**Fruit-** Watermelon 🍉')
+
 
  with col2:
      st.markdown("<h2 style='text-align: center; color: black;'>Bruno </h2>",
