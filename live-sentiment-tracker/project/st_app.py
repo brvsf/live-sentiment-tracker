@@ -11,9 +11,9 @@ from preprocess import SlangTranslation
 from model import vader_scores
 import seaborn as sns
 import matplotlib.pyplot as plt
-import nlkt
 
 
+nltk.download('punkt')
 
 #app = hy.HydraApp(title='Live sentiment tracker', use_loader=False, favicon= '😎',
 #                 navbar_theme = {'txc_inactive': '#FFFFFF','menu_background':'#FA5765','txc_active':'#FA5765','option_active':'white'})
