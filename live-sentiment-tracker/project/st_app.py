@@ -11,7 +11,7 @@ from preprocess import SlangTranslation
 from model import vader_scores
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+import nltk
 
 nltk.download('punkt')
 
