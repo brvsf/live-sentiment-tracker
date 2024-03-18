@@ -6,6 +6,14 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import streamlit.components.v1 as components
 from streamlit_option_menu import option_menu
+from nltk.tokenize import word_tokenize
+from preprocess import SlangTranslation
+from model import vader_scores
+import seaborn as sns
+import matplotlib.pyplot as plt
+import nltk
+
+nltk.download('punkt')
 
 #app = hy.HydraApp(title='Live sentiment tracker', use_loader=False, favicon= '😎',
 #                 navbar_theme = {'txc_inactive': '#FFFFFF','menu_background':'#FA5765','txc_active':'#FA5765','option_active':'white'})
@@ -129,6 +137,45 @@ if selected == "Home":
     with col3:
        st.image(img_neg.resize((neg_size, neg_size)))
 
+
+    tokenized_sentence = word_tokenize(SlangTranslation(value).apply_translator(value))
+    sentences = []
+    for i in range(1, len(tokenized_sentence) + 1):
+        new_sentence = ' '.join(tokenized_sentence[:i])
+        sentences.append([new_sentence])
+
+    # Create a list of dicts with the vader_scores for each section of the sentence
+    progressive_scores = []
+    for i in sentences:
+        progressive_scores.append(vader_scores(i[0]))
+
+    # Calculating the compound value for each word added in the sentence
+    compound_values = [score['compound'] for score in progressive_scores]
+
+    # Seaborn config
+    sns.set_style("darkgrid")
+    fig_prog = plt.figure(figsize=(10, 6))
+    sns.lineplot(x=[i+1 for i in range(len(compound_values))], y=compound_values, marker=None, color="black")
+
+    # Adding title and labels
+    plt.title('Sentiment Progression')
+    plt.xlabel('Impact of Each word')
+
+    plt.text(0.5, 1, 'Very Positive', ha='right')
+    plt.text(0.5, 0.5, 'Positive', ha='right')
+    plt.text(0.5, 0, 'Neutral', ha='right')
+    plt.text(0.5, -0.5, 'Negative', ha='right')
+    plt.text(0.5, -1, 'Very Negative', ha='right')
+
+    plt.ylim(-1, 1)
+    plt.yticks([])
+
+
+    st.markdown('You can also check how each word impacted the results of your sentence!')
+
+    graph_toggle = st.toggle('Show word progression graph')
+    if graph_toggle:
+        st.pyplot(fig_prog)
 
 
     # st.markdown(f'positive: {pos_size}, P: {result["pos"]}')
