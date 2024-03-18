@@ -67,6 +67,7 @@ if selected == "Home":
         st.markdown(' ')
         st.markdown(' ')
         st.markdown(' ')
+        st.markdown(' ')
         st.markdown('**Make sure to pay attention to the emojis while you write!**')
         st.markdown(' ')
         st.markdown('''You can also toggle the pie chart* to see a more precise
