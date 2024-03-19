@@ -18,7 +18,9 @@ nltk.download('punkt')
 #app = hy.HydraApp(title='Live sentiment tracker', use_loader=False, favicon= '😎',
 #                 navbar_theme = {'txc_inactive': '#FFFFFF','menu_background':'#FA5765','txc_active':'#FA5765','option_active':'white'})
 
-st.set_page_config(page_title="Live sentiment tracker", layout="wide")
+st.set_page_config(page_title="Live sentiment tracker", layout="wide", page_icon = "😎")
+
+
 
 selected = option_menu(
     menu_title=None,  # required
@@ -186,17 +188,87 @@ if selected == "Home":
 #def app2():
 if selected == "Project":
 
-    construction = Image.open('live-sentiment-tracker/project/images/construction.jpeg')
+    #construction = Image.open('live-sentiment-tracker/project/images/construction.jpeg')
 
-    st.markdown("<h1 style='text-align: center; color: black;'>Oops, you're here early</h1>",
+    #st.markdown("<h1 style='text-align: center; color: black;'>Oops, you're here early</h1>",
+    #             unsafe_allow_html=True)
+    #cols = st.columns([1, 1, 1, 1, 1, 1, 1])
+
+    #with cols[3]:
+    #    st.image(construction.resize((4000,4000)))
+
+    #st.markdown("<h4 style='text-align: center; color: black;'>Don't mind us :)</h4>",
+    #             unsafe_allow_html=True)
+
+
+
+    st.markdown("<h2 style='text-align: center; color: black; text-decoration:underline'>🚀 Live sentiment tracker project</h2>",
                  unsafe_allow_html=True)
-    cols = st.columns([1, 1, 1, 1, 1, 1, 1])
+    st.markdown('''Live sentiment tracker is a project that uses a pre-trained model to extract
+             sentiment from text while the user is typing it. This could be very
+             useful to help people to write a text or message while receiving
+             feedback on the emotion that the text transmits. More information
+             about our crew can be find in our **The crew** tab.''')
 
-    with cols[3]:
-        st.image(construction.resize((4000,4000)))
-
-    st.markdown("<h4 style='text-align: center; color: black;'>Don't mind us :)</h4>",
+    st.markdown("<h2 style='text-align: center; color: black; text-decoration:underline'>🔧 Technical stuff</h2>",
                  unsafe_allow_html=True)
+
+    st.markdown('''We are using the [vaderSentiment](https://github.com/cjhutto/vaderSentiment/tree/master/vaderSentiment)
+                pre-trained model. This model is widely used to work with sentiment
+                analysis and have around 88% accuracy and classify texts between
+                three emotions: Positive, negative and neutral.''')
+    st.markdown('''The model is trained by understanding the “weight” of each
+                word and how this affects the overall sentiment of a text. (read:
+                [VADER: A Parsimonious Rule-based Model for Sentiment Analysis of
+                Social Media Text](https://ojs.aaai.org/index.php/ICWSM/article/view/14550/14399)
+                ). The word cloud graph above illustrates how
+                much a word can affect the sentiment of a whole phrase.''')
+    word_cloud = Image.open('live-sentiment-tracker/project/images/word_cloud.JPG')
+    cols = st.columns((1, 1, 1))
+    with cols[1]:
+
+        st.image(word_cloud)
+
+    st.markdown('''Even though the model is already trained on some of the most
+                common abbreviations (example: lol, omg), we noticed during implementation
+                that they’re not interpreted with the same weights as the full
+                phrases. For example, “laughing out loud” had a much higher positive
+                impact than “lol” did. With that in mind, we decided to level out the
+                playing field and convert them to their extended formats.''')
+
+    st.markdown('''It’s important to note that this is not a retraining of the
+                model. This is done during the preprocessing stage and will be
+                done before the phrase is given to the model for processing.''')
+
+    st.markdown('''The bar graph below is just an example of how Vader can be used
+                to classify texts, in this case it's classifying a sample of 1000
+                [movie reviews from IMDB](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews).''')
+
+    imdb_reviews = Image.open('live-sentiment-tracker/project/images/imdb_reviews.JPG')
+    cols = st.columns((1, 1, 1))
+    with cols[1]:
+
+        st.image(imdb_reviews.resize((2500,2000)))
+
+    st.markdown("<h2 style='text-align: center; color: black; text-decoration:underline'>🔗 API</h2>",
+                 unsafe_allow_html=True)
+
+    st.markdown('''Our API is hosted in Google Cloud and can be accessed by anyone
+                using the [link](https://live-sentiment-tracker-xi2puhfsaq-ew.a.run.app/).
+                Here’s a quick tutorial on how to use it effectively:''')
+
+    st.markdown('''1. If you want to make a query to receive the overall sentiment
+                of a text you should use **"/predict"**, with the following syntax:  \n
+                https://live-sentiment-tracker-xi2puhfsaq-ew.a.run.app/predict?sentence=<TEXT>''')
+    st.markdown('''2. If you want to receive the scores of each sentiment in a
+                text you should use **"/scores"**, with the following syntax:  \n
+                https://live-sentiment-tracker-xi2puhfsaq-ew.a.run.app/scores?sentence=<TEXT>''')
+    st.markdown('''**PS: Make sure you write your text as you normally would, with regular spacing.
+                The URL formatting will be taken care of automatically**''')
+
+
+
+
 
 
 #@app.addapp(title=' The crew', icon = '👨‍🔧')
@@ -252,15 +324,35 @@ if selected == "The crew":
         </style>
         """, unsafe_allow_html=True)
 
+ with col8:
+    rachid_pfp = Image.open('live-sentiment-tracker/project/images/rachid_pfp.png')
+    st.image(rachid_pfp.resize((200,200)))
+
+    st.markdown("""
+        <style>
+            .st-emotion-cache-1v0mbdj {
+              width: 150px;
+              height: 150px;
+              border-radius: 50%;
+              overflow: hidden;
+              box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+          }
+
+            .st-emotion-cache-1v0mbdj img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+          }
+        </style>
+        """, unsafe_allow_html=True)
+
+
+
+
  col1, col2, col3 = st.columns(3)
-
  with col1:
-
-
      st.markdown("<h2 style='text-align: center; color: black;'>Isaac </h2>",
                  unsafe_allow_html=True)
-
-
      st.markdown('**Pets-**  None 😔')
      st.markdown('**Food-** Pho 🍜')
      st.markdown('**Age-** 24 ')
@@ -270,13 +362,10 @@ if selected == "The crew":
      st.markdown('**Fruit-** Watermelon 🍉')
      st.link_button("Check Isaac's Linkedin",
                     "https://www.linkedin.com/in/isaac-pereira-474a9117b")
-
-
  with col2:
      st.markdown("<h2 style='text-align: center; color: black;'>Bruno </h2>",
                  unsafe_allow_html=True)
-
-     st.markdown('**Pets-**  Horus 🐶')
+     st.markdown('**Pets-**  Frenchie 🐶')
      st.markdown('**Food-** Sushi 🍣')
      st.markdown('**Age-** 24 ')
      st.markdown('**Season-** Winter ⛄')
@@ -285,12 +374,17 @@ if selected == "The crew":
      st.markdown('**Fruit-** Strawberry :strawberry:')
      st.link_button("Check Bruno's Linkedin",
                     "https://www.linkedin.com/in/bruno-vieira-2b0817238")
-
  with col3:
      st.markdown("<h2 style='text-align: center; color: black;'>Rachid </h2>",
                  unsafe_allow_html=True)
-
-
-
-#Run the whole lot, we get navbar, state management and app isolation, all with this tiny amount of work.
-#app.run()
+     st.markdown('**Pets-**  Beagle 🐶')
+     st.markdown('**Food-** Fish 🐟')
+     st.markdown('**Age-** 32 ')
+     st.markdown('**Season-** Summer 🏖️')
+     st.markdown('**Movie-** The Hangover 🐅')
+     st.markdown('**Beverage-** Pineapple juice 🧃')
+     st.markdown('**Fruit-** Pineapple 🍍')
+     st.link_button("Check Rachid's Linkedin",
+                    "https://www.linkedin.com/in/rachid-ghanem-a167a3114/")
+ #Run the whole lot, we get navbar, state management and app isolation, all with this tiny amount of work.
+ #app.run()
