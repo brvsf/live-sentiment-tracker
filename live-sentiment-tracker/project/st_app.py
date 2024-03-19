@@ -175,9 +175,12 @@ if selected == "Home":
 
     st.markdown('You can also check how each word impacted the results of your sentence!')
 
-    graph_toggle = st.toggle('Show word progression graph')
+    graph_toggle = st.toggle('Show sentiment progression graph')
     if graph_toggle:
-        st.pyplot(fig_prog)
+        if len(value.split(' ')) >= 5:
+            st.pyplot(fig_prog)
+        else:
+            st.markdown('**⚠️Please make sure to write at least 5 words.⚠️**')
 
 
     # st.markdown(f'positive: {pos_size}, P: {result["pos"]}')
@@ -205,17 +208,17 @@ if selected == "Project":
     st.markdown("<h2 style='text-align: center; color: black; text-decoration:underline'>🚀 Live sentiment tracker project</h2>",
                  unsafe_allow_html=True)
     st.markdown('''Live sentiment tracker is a project that uses a pre-trained model to extract
-             sentiment from text while the user is typing it. This could be very
-             useful to help people to write a text or message while receiving
-             feedback on the emotion that the text transmits. More information
-             about our crew can be find in our **The crew** tab.''')
+             sentiment from text as the user types. This can be very
+             useful to help people write a text or message while receiving
+             feedback on the overall emotion that the text expresses. More information
+             about the people who made this happen can be find in our **The crew** tab.''')
 
     st.markdown("<h2 style='text-align: center; color: black; text-decoration:underline'>🔧 Technical stuff</h2>",
                  unsafe_allow_html=True)
 
-    st.markdown('''We are using the [vaderSentiment](https://github.com/cjhutto/vaderSentiment/tree/master/vaderSentiment)
+    st.markdown('''Our app uses the [vaderSentiment](https://github.com/cjhutto/vaderSentiment/tree/master/vaderSentiment)
                 pre-trained model. This model is widely used to work with sentiment
-                analysis and have around 88% accuracy and classify texts between
+                analysis and has around 88% accuracy, classifying texts between
                 three emotions: Positive, negative and neutral.''')
     st.markdown('''The model is trained by understanding the “weight” of each
                 word and how this affects the overall sentiment of a text. (read:
@@ -236,11 +239,11 @@ if selected == "Project":
                 impact than “lol” did. With that in mind, we decided to level out the
                 playing field and convert them to their extended formats.''')
 
-    st.markdown('''It’s important to note that this is not a retraining of the
+    st.markdown('''It’s important to note that this is not the same as retraining the
                 model. This is done during the preprocessing stage and will be
                 done before the phrase is given to the model for processing.''')
 
-    st.markdown('''The bar graph below is just an example of how Vader can be used
+    st.markdown('''The bar graph below is an example of how Vader can be used
                 to classify texts, in this case it's classifying a sample of 1000
                 [movie reviews from IMDB](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews).''')
 
@@ -254,7 +257,7 @@ if selected == "Project":
                  unsafe_allow_html=True)
 
     st.markdown('''Our API is hosted in Google Cloud and can be accessed by anyone
-                using the [link](https://live-sentiment-tracker-xi2puhfsaq-ew.a.run.app/).
+                using this [link](https://live-sentiment-tracker-xi2puhfsaq-ew.a.run.app/).
                 Here’s a quick tutorial on how to use it effectively:''')
 
     st.markdown('''1. If you want to make a query to receive the overall sentiment
@@ -275,11 +278,9 @@ if selected == "Project":
 #def app3():
 if selected == "The crew":
 
+ cols = st.columns((1,1,1,1,1,1))
 
- col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
-
- with col2:
-
+ with cols[1]:
      isaac_pfp = Image.open('live-sentiment-tracker/project/images/isaac_pfp.jpg')
      st.image(isaac_pfp.resize((200,200)))
 
@@ -300,9 +301,10 @@ if selected == "The crew":
           }
         </style>
         """, unsafe_allow_html=True)
+     st.markdown("<h2 style='text-align: center; color: black;'>Isaac  🤔</h2>",
+                 unsafe_allow_html=True)
 
- with col5:
-
+ with cols[-2]:
     bruno_pfp = Image.open('live-sentiment-tracker/project/images/bruno_pfp.jpeg')
     st.image(bruno_pfp.resize((200,200)))
 
@@ -322,37 +324,15 @@ if selected == "The crew":
               object-fit: cover;
           }
         </style>
-        """, unsafe_allow_html=True)
+       """, unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: black;'>Bruno 🧐</h2>",
+                unsafe_allow_html=True)
 
- with col8:
-    rachid_pfp = Image.open('live-sentiment-tracker/project/images/rachid_pfp.png')
-    st.image(rachid_pfp.resize((200,200)))
+ col1, col2 = st.columns(2)
 
-    st.markdown("""
-        <style>
-            .st-emotion-cache-1v0mbdj {
-              width: 150px;
-              height: 150px;
-              border-radius: 50%;
-              overflow: hidden;
-              box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-          }
-
-            .st-emotion-cache-1v0mbdj img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-          }
-        </style>
-        """, unsafe_allow_html=True)
-
-
-
-
- col1, col2, col3 = st.columns(3)
  with col1:
-     st.markdown("<h2 style='text-align: center; color: black;'>Isaac </h2>",
-                 unsafe_allow_html=True)
+
+
      st.markdown('**Pets-**  None 😔')
      st.markdown('**Food-** Pho 🍜')
      st.markdown('**Age-** 24 ')
@@ -362,29 +342,24 @@ if selected == "The crew":
      st.markdown('**Fruit-** Watermelon 🍉')
      st.link_button("Check Isaac's Linkedin",
                     "https://www.linkedin.com/in/isaac-pereira-474a9117b")
+
  with col2:
-     st.markdown("<h2 style='text-align: center; color: black;'>Bruno </h2>",
-                 unsafe_allow_html=True)
-     st.markdown('**Pets-**  Frenchie 🐶')
-     st.markdown('**Food-** Sushi 🍣')
-     st.markdown('**Age-** 24 ')
-     st.markdown('**Season-** Winter ⛄')
-     st.markdown('**Movie-** The Lord of The Rings: The Return of the King :ring:')
-     st.markdown('**Beverage-** Coffee :coffee:')
-     st.markdown('**Fruit-** Strawberry :strawberry:')
-     st.link_button("Check Bruno's Linkedin",
-                    "https://www.linkedin.com/in/bruno-vieira-2b0817238")
- with col3:
-     st.markdown("<h2 style='text-align: center; color: black;'>Rachid </h2>",
-                 unsafe_allow_html=True)
-     st.markdown('**Pets-**  Beagle 🐶')
-     st.markdown('**Food-** Fish 🐟')
-     st.markdown('**Age-** 32 ')
-     st.markdown('**Season-** Summer 🏖️')
-     st.markdown('**Movie-** The Hangover 🐅')
-     st.markdown('**Beverage-** Pineapple juice 🧃')
-     st.markdown('**Fruit-** Pineapple 🍍')
-     st.link_button("Check Rachid's Linkedin",
-                    "https://www.linkedin.com/in/rachid-ghanem-a167a3114/")
+
+    st.markdown('**Pets-**  Horus 🐶')
+    st.markdown('**Food-** Sushi 🍣')
+    st.markdown('**Age-** 24 ')
+    st.markdown('**Season-** Winter ⛄')
+    st.markdown('**Movie-** The Lord of The Rings: The Return of the King :ring:')
+    st.markdown('**Beverage-** Coffee :coffee:')
+    st.markdown('**Fruit-** Strawberry :strawberry:')
+    st.link_button("Check Bruno's Linkedin",
+                   "https://www.linkedin.com/in/bruno-vieira-2b0817238")
+
+ col1, col2, col3, col4, col5, col6 = st.columns(6)
+ #with col2:
+
+ #with col3:
+
+
  #Run the whole lot, we get navbar, state management and app isolation, all with this tiny amount of work.
  #app.run()
