@@ -21,7 +21,7 @@ Live-sentiment-tracker: Project folder containing all python files \
 ---> data.py: import data \
 ---> model.py: contain models information and functions \
 ---> preprocess.py : slang translator + basic preprocess  \
----> st_app.py: frontend streamlit code \
+---> st_app.py: frontend streamlit code
 
 Requirements.txt: requirements of the project
 
